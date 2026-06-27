@@ -1,0 +1,53 @@
+name-template: "v$RESOLVED_VERSION"
+tag-template: "v$RESOLVED_VERSION"
+
+categories:
+  - title: "새로운 기능"
+    labels:
+      - feature
+      - enhancement
+  - title: "버그 수정"
+    labels:
+      - fix
+      - bug
+  - title: "폰트/빌드 개선"
+    labels:
+      - font
+      - build
+      - ci
+  - title: "문서"
+    labels:
+      - docs
+  - title: "정리"
+    labels:
+      - chore
+      - refactor
+
+change-template: "- $TITLE (#$NUMBER) @$AUTHOR"
+change-title-escapes: '\<*_&`#@'
+no-changes-template: "- 변경사항이 없습니다."
+
+template: |
+  ## 변경사항
+
+  $CHANGES
+
+version-resolver:
+  major:
+    labels:
+      - major
+  minor:
+    labels:
+      - feature
+      - enhancement
+      - font
+  patch:
+    labels:
+      - fix
+      - bug
+      - build
+      - ci
+      - docs
+      - chore
+      - refactor
+  default: patch

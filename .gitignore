@@ -1,0 +1,9 @@
+.serena
+.venv/
+.DS_Store
+sources/
+build/
+dist/
+out/
+*.pyc
+__pycache__/
