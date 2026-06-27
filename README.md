@@ -71,6 +71,8 @@ VS Code에서는 설치 후 아래처럼 설정합니다.
 
 ## 빌드
 
+### 로컬 빌드
+
 필요한 도구:
 
 - Python 3.12 이상
@@ -89,10 +91,45 @@ fontforge -script scripts/build_regular.py
 uv run python scripts/fix_tables.py
 uv run python scripts/check_metrics.py
 uv run python scripts/test_font.py
+uv run python scripts/package_release.py
 uv run python scripts/test_outputs.py
 ```
 
 산출물은 `out/fonts/` 아래에 생성됩니다.
+Release zip 파일은 `out/release/` 아래에 생성됩니다.
+
+### Docker 빌드
+
+로컬에 FontForge나 HarfBuzz를 설치하지 않고 Docker로도 같은 빌드를 실행할 수 있습니다.
+
+```sh
+docker compose run --rm build
+```
+
+Docker는 현재 작업 폴더만 `/work`로 마운트합니다. Python 가상환경과 uv cache는
+Docker 전용 volume을 사용하므로 로컬 `.venv`는 사용하지 않습니다. Docker 환경을
+초기화하려면 `docker compose down -v`를 실행합니다.
+
+Docker 이미지는 `mabyko/mabyko-mono-build:1.0.0` 이름으로
+생성됩니다.
+이미지까지 지우려면 아래 명령을 실행합니다.
+
+```sh
+docker compose down -v
+docker image rm mabyko/mabyko-mono-build:1.0.0
+```
+
+이미 생성된 산출물을 다시 검증할 때:
+
+```sh
+docker compose run --rm test
+```
+
+컨테이너 shell로 들어갈 때:
+
+```sh
+docker compose run --rm shell
+```
 
 ## Contributing
 

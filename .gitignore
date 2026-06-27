@@ -1,6 +1,7 @@
 .serena
 .venv/
 .DS_Store
+.cache/
 sources/
 build/
 dist/
