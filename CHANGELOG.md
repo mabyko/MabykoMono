@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.0
+
+### Changed
+
+- Update Nerd Fonts symbols from 3.4.0 to 3.5.0
+  - Add Braille, Obsidian, Wireshark, and zsh icons
+  - Update Codicons to 0.0.45, Devicons to 2.17.0, Font Logos to 1.4.0
+
 ## 0.1.0
 
 Initial release.
