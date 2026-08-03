@@ -52,9 +52,9 @@ def main() -> None:
     fetch(fonts["d2coding_url"], d2_zip)
     unpack_zip(d2_zip, SOURCES / "D2Coding-Ver1.3.2-20180524")
 
-    nf_tar = SOURCES / "NerdFontsSymbolsOnly-3.4.0.tar.xz"
+    nf_tar = SOURCES / "NerdFontsSymbolsOnly-3.5.0.tar.xz"
     fetch(fonts["nerd_fonts_url"], nf_tar)
-    unpack_tar_xz(nf_tar, SOURCES / "NerdFontsSymbolsOnly-3.4.0")
+    unpack_tar_xz(nf_tar, SOURCES / "NerdFontsSymbolsOnly-3.5.0")
 
 
 if __name__ == "__main__":
