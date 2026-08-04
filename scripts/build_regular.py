@@ -74,6 +74,27 @@ def scale_to_width(glyph, width):
     glyph.width = width
 
 
+def stretch_to_box(glyph, width, bottom, top):
+    xmin, ymin, xmax, ymax = glyph.boundingBox()
+    if xmax > xmin and ymax > ymin:
+        glyph.transform(psMat.translate(-xmin, -ymin))
+        glyph.transform(psMat.scale(width / (xmax - xmin), (top - bottom) / (ymax - ymin)))
+        glyph.transform(psMat.translate(0, bottom))
+    glyph.width = width
+
+
+def fit_cell(glyph, width):
+    old_width = glyph.width
+    if old_width > 0 and old_width != width:
+        scale = width / old_width
+        _, ymin, _, ymax = glyph.boundingBox()
+        cy = (ymin + ymax) / 2
+        glyph.transform(psMat.translate(0, -cy))
+        glyph.transform(psMat.scale(scale))
+        glyph.transform(psMat.translate(0, cy))
+    center_width(glyph, width)
+
+
 def unlink(font):
     font.selection.all()
     font.unlinkReferences()
@@ -187,7 +208,10 @@ def build_style(fonts, variant, style, weight, half_width, full_width, output_di
         suffix_glyph_names(nf, "-nf")
         for glyph in nf.glyphs():
             if glyph.isWorthOutputting() and glyph.unicode >= 0:
-                center_width(glyph, half_width)
+                if 0xE0B0 <= glyph.unicode <= 0xE0D4:
+                    stretch_to_box(glyph, half_width, -jb.os2_windescent, jb.os2_winascent)
+                else:
+                    fit_cell(glyph, half_width)
         nf_path = BUILD / f"nerd-subset-{variant['dirname']}-{style}.ttf"
         nf.generate(str(nf_path))
         clear_ranges(jb, NERD_RANGES)

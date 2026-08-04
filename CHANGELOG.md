@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.3.0
+
+### Fixed
+
+- Fit Nerd Font symbols within a single half-width cell
+  - Symbols previously kept their source size and overflowed into neighboring cells
+  - Powerline glyphs (`U+E0B0`–`U+E0D4`) now stretch to fill the full cell so prompt separators connect seamlessly
+
+### Changed
+
+- Verify sha256 checksums of downloaded source archives
+- Derive source archive names from `config.ini` versions
+- Merge `check_metrics.py` checks into `test_font.py`
+
 ## 0.2.0
 
 ### Changed
