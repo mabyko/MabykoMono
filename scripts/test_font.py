@@ -65,8 +65,24 @@ def main() -> None:
         has_nerd = font_file.parent.name.endswith("-nf")
         if has_nerd:
             assert advance(font, 0xE0B0) == half
+            powerline = font["glyf"][font.getBestCmap()[0xE0B0]]
+            assert (powerline.xMin, powerline.xMax) == (0, half), (
+                "powerline must fill the cell",
+                powerline.xMin,
+                powerline.xMax,
+            )
         if 0x2665 in font.getBestCmap():
             assert not font.getBestCmap()[0x2665].endswith("-nf")
+
+        family_names = {
+            record.toUnicode()
+            for record in font["name"].names
+            if record.nameID in {1, 16}
+        }
+        assert any(name.startswith("Mabyko Mono") for name in family_names), (
+            font_file,
+            family_names,
+        )
 
         assert font["post"].isFixedPitch == 1
         assert font["OS/2"].xAvgCharWidth == half

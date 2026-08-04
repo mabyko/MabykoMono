@@ -15,7 +15,6 @@ Release Drafter가 릴리스 노트를 만들 수 있도록 알맞은 라벨을 
 
 ## 확인
 
-- [ ] `uv run python scripts/check_metrics.py`
 - [ ] `uv run python scripts/test_font.py`
 - [ ] `uv run python scripts/test_outputs.py`
 - [ ] 새 glyph 범위나 metric 정책을 바꿨다면 테스트를 추가했다.

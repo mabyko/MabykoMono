@@ -98,7 +98,6 @@ uv run python scripts/fetch.py
 rm -rf build out/fonts
 fontforge -script scripts/build_regular.py
 uv run python scripts/fix_tables.py
-uv run python scripts/check_metrics.py
 uv run python scripts/test_font.py
 uv run python scripts/package_release.py
 uv run python scripts/test_outputs.py
