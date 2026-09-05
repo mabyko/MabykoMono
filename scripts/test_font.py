@@ -48,6 +48,9 @@ def hb_shape(font_file, text):
 
 
 def main() -> None:
+    config = configparser.ConfigParser()
+    config.read(ROOT / "config.ini")
+    timestamp = config["fonts"].getint("source_date_epoch") + 2082844800
     assert FONTS, "no fonts found"
     for font_file in FONTS:
         font = TTFont(font_file)
@@ -85,6 +88,8 @@ def main() -> None:
         )
 
         assert font["post"].isFixedPitch == 1
+        assert font["head"].created == font["head"].modified == timestamp
+        assert "FFTM" not in font
         assert font["OS/2"].xAvgCharWidth == half
         assert font["hhea"].advanceWidthMax == max(
             width for width, _ in font["hmtx"].metrics.values()

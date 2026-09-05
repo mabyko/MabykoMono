@@ -1,10 +1,10 @@
 [project]
 name = "mabyko-mono"
-version = "0.2.0"
+version = "0.3.0"
 description = "Build Mabyko Mono from JetBrains Mono, D2Coding, and Nerd Fonts."
 requires-python = ">=3.12"
 dependencies = [
-  "fonttools>=4.60",
+  "fonttools>=4.64.0",
 ]
 
 [tool.uv]
