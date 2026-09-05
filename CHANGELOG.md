@@ -1,5 +1,21 @@
 # Changelog
 
+## Unreleased
+
+### Changed
+
+- Update Nerd Fonts 3.5.0 → 3.5.1, D2Coding 1.3.2 → 1.3.3, and fontTools 4.63.0 → 4.64.0
+- Include the project license and original upstream copyright/license notices in every release ZIP
+- Pin Docker base and uv images by digest and APT packages to the 2026-09-05 Ubuntu snapshot
+- Normalize TTF and ZIP timestamps for reproducible output
+- Run existing font checks and a second-build SHA256 comparison in PR/main CI
+
+### Fixed
+
+- Extract source archives atomically so interrupted extraction can be retried
+- Respect `output_root` in output validation and compare packaged bytes with source files
+- Align Python project metadata with font version 0.3.0 and validate version consistency
+
 ## 0.3.0
 
 ### Fixed
