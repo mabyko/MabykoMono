@@ -5,6 +5,7 @@
 ### Added
 
 - Homebrew tap `mabyko/tap` with casks for `Mabyko Mono NF`, `Mabyko Mono`, and `Mabyko Mono NL`
+- `bump-tap.yml` workflow that updates the tap casks when a release is published
 
 ### Changed
 
