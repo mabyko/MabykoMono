@@ -1,7 +1,7 @@
 # Mabyko Mono
 
 Mabyko Mono는 [JetBrains Mono](https://github.com/JetBrains/JetBrainsMono),
-[D2Coding](https://github.com/naver/d2codingfont),
+[D2Coding](https://github.com/naver/d2-coding-font),
 [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts)를 합성한 한국어 친화
 프로그래밍 폰트입니다.
 
@@ -47,7 +47,15 @@ Mabyko Mono는 [JetBrains Mono](https://github.com/JetBrains/JetBrainsMono),
 
 ### macOS
 
-`.ttf` 파일을 더블클릭한 뒤 Font Book에서 설치합니다.
+Homebrew로 설치합니다.
+
+```sh
+brew install --cask mabyko/tap/font-mabyko-mono-nf   # Nerd Font symbols 포함
+brew install --cask mabyko/tap/font-mabyko-mono      # 일반
+brew install --cask mabyko/tap/font-mabyko-mono-nl   # ligature 제거
+```
+
+Homebrew 없이 설치할 때는 `.ttf` 파일을 더블클릭한 뒤 Font Book에서 설치합니다.
 
 ### Windows
 
@@ -74,7 +82,7 @@ VS Code에서는 설치 후 아래처럼 설정합니다.
 폰트 파일에는 업그레이드 개념이 없어서, 같은 이름의 새 버전을 설치하면
 중복 설치로 처리됩니다. 이전 버전을 제거한 뒤 새 버전을 설치합니다.
 
-- macOS: 서체 관리자에서 `Mabyko Mono` 패밀리를 제거한 뒤 새로 설치합니다.
+- macOS: Homebrew로 설치했다면 `brew upgrade`로 처리됩니다. 직접 설치했다면 서체 관리자에서 `Mabyko Mono` 패밀리를 제거한 뒤 새로 설치합니다.
 - Windows: 설정 → 개인 설정 → 글꼴에서 제거한 뒤 새로 설치합니다.
 - Linux: `~/.local/share/fonts`의 기존 파일을 덮어쓰고 `fc-cache -f`를 실행합니다.
 
@@ -185,7 +193,7 @@ Mabyko Mono는 SIL Open Font License 1.1, 즉 OFL 1.1로 배포합니다.
 - JetBrains Mono: Copyright 2020 The JetBrains Mono Project Authors.
   https://github.com/JetBrains/JetBrainsMono
 - D2Coding: Copyright NAVER Corp.
-  https://github.com/naver/d2codingfont
+  https://github.com/naver/d2-coding-font
 - Nerd Fonts: Copyright (c) 2014 Ryan L McIntyre.
   https://github.com/ryanoasis/nerd-fonts
 

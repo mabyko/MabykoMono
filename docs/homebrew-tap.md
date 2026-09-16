@@ -225,9 +225,9 @@ jobs:
 
 ## 체크리스트
 
-- [ ] 1. `mabyko/homebrew-tap` 저장소 생성
-- [ ] 2. 캐스크 3개 작성·푸시
-- [ ] 3. 수동 설치 폰트 제거 → `brew install` 테스트 → `brew audit`/`brew style` 통과
-- [ ] 4. README에 Homebrew 설치법 추가 (PR, docs 라벨)
+- [x] 1. `mabyko/homebrew-tap` 저장소 생성
+- [x] 2. 캐스크 3개 작성·푸시
+- [x] 3. 수동 설치 폰트 제거 → `brew install` 테스트 → `brew audit`/`brew style` 통과
+- [x] 4. README에 Homebrew 설치법 추가 (PR, docs 라벨)
 - [ ] 5. PAT 발급·시크릿 등록 → `bump-tap.yml` 추가 (PR, build 라벨)
 - [ ] 6. (다음 릴리스 때) 자동 범프 동작 확인
