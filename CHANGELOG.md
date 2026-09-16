@@ -1,5 +1,17 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- Homebrew tap `mabyko/tap` with casks for `Mabyko Mono NF`, `Mabyko Mono`, and `Mabyko Mono NL`
+- `bump-tap.yml` workflow that updates the tap casks when a release is published
+
+### Changed
+
+- Pin the release-drafter action to a commit SHA
+- Point D2Coding links to the renamed `naver/d2-coding-font` repository
+
 ## 0.4.0
 
 ### Changed

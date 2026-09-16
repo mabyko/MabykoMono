@@ -164,7 +164,7 @@ brew install --cask mabyko/tap/font-mabyko-mono-nl   # ligature 제거
    - (org 드롭다운이 안 보이면 org Settings → Third-party Access에서 fine-grained PAT 허용,
      또는 classic 토큰 `repo` 스코프로 대체)
 2. MabykoMono 저장소 → Settings → Secrets and variables → Actions →
-   New repository secret: 이름 `TAP_GITHUB_TOKEN`, 값 = 토큰
+   New repository secret: 이름 `MABYKO_TAP_GITHUB_TOKEN`, 값 = 토큰
 
 ### MabykoMono에 `.github/workflows/bump-tap.yml` 추가
 
@@ -180,10 +180,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout tap
-        uses: actions/checkout@v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: mabyko/homebrew-tap
-          token: ${{ secrets.TAP_GITHUB_TOKEN }}
+          token: ${{ secrets.MABYKO_TAP_GITHUB_TOKEN }}
 
       - name: Update casks
         env:
@@ -225,9 +225,9 @@ jobs:
 
 ## 체크리스트
 
-- [ ] 1. `mabyko/homebrew-tap` 저장소 생성
-- [ ] 2. 캐스크 3개 작성·푸시
-- [ ] 3. 수동 설치 폰트 제거 → `brew install` 테스트 → `brew audit`/`brew style` 통과
-- [ ] 4. README에 Homebrew 설치법 추가 (PR, docs 라벨)
-- [ ] 5. PAT 발급·시크릿 등록 → `bump-tap.yml` 추가 (PR, build 라벨)
+- [x] 1. `mabyko/homebrew-tap` 저장소 생성
+- [x] 2. 캐스크 3개 작성·푸시
+- [x] 3. 수동 설치 폰트 제거 → `brew install` 테스트 → `brew audit`/`brew style` 통과
+- [x] 4. README에 Homebrew 설치법 추가 (PR, docs 라벨)
+- [x] 5. PAT 발급·시크릿 등록 → `bump-tap.yml` 추가 (PR, build 라벨)
 - [ ] 6. (다음 릴리스 때) 자동 범프 동작 확인
