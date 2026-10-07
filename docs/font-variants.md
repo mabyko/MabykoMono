@@ -42,6 +42,28 @@ D2Coding은 일반 Regular/Bold에서 한글·전각 범위만 가져온다. 영
 fontTools는 `uv.lock`, uv는 Docker 이미지 digest로 고정한다. Docker 빌드 이미지 이름은
 `mabyko/mabyko-mono-build:1.2.0`이며 Ubuntu digest와 APT 스냅샷은 기존 값을 유지한다.
 
+## 폰트 버전 메타데이터
+
+0.5.1부터 `scripts/fix_tables.py`는 `head.fontRevision`을 원본 JetBrains Mono에서
+물려받은 값 대신 `config.ini`의 Mabyko Mono 버전으로 설정한다. 원본 버전은
+`jetbrains_mono_version`, `d2coding_version`, `nerd_fonts_version`에 별도로 유지한다.
+
+문자열 버전(name ID 5)은 `Version 0.5.1`처럼 릴리스 버전을 그대로 표시한다.
+숫자형 필드는 세 부분을 담을 수 없어 `MAJOR + MINOR / 100 + PATCH / 10000`으로
+변환한다. 예를 들어 `0.5.1`은 `0.0501`, `0.5.10`은 `0.0510`, `0.6.0`은 `0.0600`이다.
+이 값은 16.16 고정소수점으로 반올림해 저장하므로 읽은 값에는 작은 오차가 있을 수 있다.
+`0.5.1`의 실제 저장 값은 `0.0500946044921875`다.
+
+지원 범위는 안정 버전 `MAJOR.MINOR.PATCH`, MAJOR 0–32767, MINOR/PATCH 각각 0–99다.
+범위를 벗어나거나 사전 릴리스·빌드 식별자가 붙으면 빌드를 중단한다. 범위를 확장할 때는
+표현 규칙을 먼저 변경해야 한다. `test_versions.py`는 패치·마이너·메이저 전환의 증가 순서와
+범위를 확인하며, `test_font.py`는 36개 폰트의 실제 숫자형·문자열 버전을 검사한다.
+
+숫자형 표현은 프로젝트의 규칙이다. 필드 형식은 [OpenType head 규격](https://learn.microsoft.com/en-us/typography/opentype/spec/head)을 따른다.
+일부 설치 프로그램은 [name ID 5의 첫 두 숫자만](https://learn.microsoft.com/en-us/typography/opentype/spec/name#name-ids)
+비교할 수 있으므로, 수동 설치에서 패치 버전을 구분하지 못하면 기존 복사본을 교체한다.
+Homebrew 배포 버전은 `0.5.1` 같은 릴리스 버전으로 관리한다.
+
 ## 검증과 참고 자료
 
 `scripts/test_font.py`는 실제 advance, 범위 커버리지, 리거처 유무, NF/Powerline 셀 폭,

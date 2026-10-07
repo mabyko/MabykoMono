@@ -27,6 +27,7 @@ services:
       - uv-cache:/root/.cache/uv
     command: >
       bash -lc "uv sync --locked &&
+      uv run --locked python scripts/test_versions.py &&
       uv run --locked python scripts/test_build.py &&
       uv run --locked python scripts/test_tap.py &&
       uv run --locked python scripts/fetch.py &&
@@ -49,7 +50,8 @@ services:
       - docker-venv:/venv
       - uv-cache:/root/.cache/uv
     command: >
-      bash -lc "uv run --locked python scripts/test_tap.py &&
+      bash -lc "uv run --locked python scripts/test_versions.py &&
+      uv run --locked python scripts/test_tap.py &&
       uv run --locked python scripts/test_font.py &&
       uv run --locked python scripts/package_release.py &&
       uv run --locked python scripts/test_outputs.py"

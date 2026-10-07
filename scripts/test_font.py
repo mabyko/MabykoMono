@@ -6,6 +6,8 @@ from pathlib import Path
 
 from fontTools.ttLib import TTFont
 
+from fix_tables import font_revision
+
 
 ROOT = Path(__file__).resolve().parents[1]
 def font_paths() -> list[Path]:
@@ -92,7 +94,11 @@ def main() -> None:
         )
         assert all(("Narrow" in name) == is_narrow for name in family_names)
         assert font["OS/2"].usWidthClass == (4 if is_narrow else 5)
-        assert font["name"].getDebugName(5) == f"Version {config['fonts']['version']}"
+        version_names = [record.toUnicode() for record in font["name"].names if record.nameID == 5]
+        assert version_names and all(name == f"Version {config['fonts']['version']}" for name in version_names)
+        assert font["head"].fontRevision == font_revision(config["fonts"]["version"]), (
+            font_file, "font revision differs from the Mabyko Mono release"
+        )
 
         assert font["post"].isFixedPitch == 1
         assert font["head"].created == font["head"].modified == timestamp
@@ -140,7 +146,7 @@ def main() -> None:
         )
         assert "Mabyko Mono" in fc_scan
 
-    print(f"ok: {len(FONTS)} fonts coverage, widths, Narrow height preservation, HarfBuzz shaping, fontconfig")
+    print(f"ok: {len(FONTS)} fonts coverage, widths, Narrow height preservation, release versions, HarfBuzz shaping, fontconfig")
 
 
 if __name__ == "__main__":
