@@ -95,7 +95,7 @@ brew install --cask mabyko/tap/font-mabyko-mono-narrow
 brew install --cask mabyko/tap/font-mabyko-mono-narrow-nl
 ```
 
-v0.5.0의 기본형·Narrow 6종 모두 tap에서 설치할 수 있습니다.
+기본형·Narrow 6종 모두 tap에서 설치할 수 있습니다.
 
 Homebrew 없이 설치할 때는 `.ttf` 파일을 더블클릭한 뒤 Font Book에서 설치합니다.
 직접 설치한 같은 패밀리의 구버전은 교체하거나 제거한 뒤 설치하세요.
@@ -266,10 +266,14 @@ PR과 `main` push의 CI는 전체 빌드·검증 후 다시 빌드해 TTF 36개�
 전체 빌드·해시 비교를 다시 수행합니다. 원본 폰트를 갱신할 때는 `config.ini`의
 버전·URL·SHA256·경로와 `licenses/`의 해당 원본 고지를 함께 갱신합니다.
 프로젝트 버전은 `config.ini`와 `pyproject.toml`을 함께 바꾸고 `uv lock`으로 반영합니다.
+`fix_tables.py`는 숫자형 폰트 버전도 프로젝트 버전으로 맞춥니다.
+문자열은 `Version 0.5.1`, 숫자형은 `0.0501`처럼 저장하며,
+변환 규칙과 지원 범위는 [폰트 버전 메타데이터](docs/font-variants.md#폰트-버전-메타데이터)를 참고하세요.
 
 다운로드나 FontForge 없이 빌드 스크립트의 회귀 검증만 실행할 수도 있습니다.
 
 ```sh
+uv run --locked python scripts/test_versions.py
 uv run --locked python scripts/test_build.py
 ```
 
