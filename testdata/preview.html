@@ -29,6 +29,30 @@
       font-weight: 400;
     }
 
+    @font-face {
+      font-family: "Mabyko Mono Narrow NF Preview";
+      src: url("../out/fonts/narrow-nf/MabykoMonoNarrowNF-Regular.ttf") format("truetype");
+      font-weight: 400;
+    }
+
+    @font-face {
+      font-family: "Mabyko Mono Narrow NF Preview";
+      src: url("../out/fonts/narrow-nf/MabykoMonoNarrowNF-Bold.ttf") format("truetype");
+      font-weight: 700;
+    }
+
+    @font-face {
+      font-family: "Mabyko Mono Narrow Preview";
+      src: url("../out/fonts/narrow/MabykoMonoNarrow-Regular.ttf") format("truetype");
+      font-weight: 400;
+    }
+
+    @font-face {
+      font-family: "Mabyko Mono Narrow NL Preview";
+      src: url("../out/fonts/narrow-nl/MabykoMonoNarrowNL-Regular.ttf") format("truetype");
+      font-weight: 400;
+    }
+
     :root {
       color-scheme: dark;
       --bg: #0d1117;
@@ -118,6 +142,18 @@
       font-family: "Mabyko Mono NL Preview", monospace;
     }
 
+    .narrow {
+      font-family: "Mabyko Mono Narrow NF Preview", monospace;
+    }
+
+    .narrow-plain {
+      font-family: "Mabyko Mono Narrow Preview", monospace;
+    }
+
+    .narrow-nl {
+      font-family: "Mabyko Mono Narrow NL Preview", monospace;
+    }
+
     .liga-off {
       font-variant-ligatures: none;
     }
@@ -199,6 +235,47 @@ a가a가a가a가a가a가a
 ＡＢＣＤＥＦＧＨＩＪ
 １２３４５６７８９０</div>
         <p class="meta">half-width 600, full-width 1200</p>
+      </article>
+    </section>
+
+    <h2>Narrow</h2>
+    <section class="grid">
+      <article class="card">
+        <h3>Mabyko Mono Narrow NF</h3>
+        <div class="sample narrow">가나다라마바사아자차카타파하
+abcdefghijklmnopqrstuvwxyz
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+1234567890 !@#$%^&amp;* _=+~
+== ++ --     -&gt; &lt;= &gt;= || &amp;&amp;
+     󰂄 󰌾   󱃾     󰍲</div>
+        <p class="meta">500 / 1000, Nerd Font symbols 포함, ligature ON</p>
+      </article>
+      <article class="card">
+        <h3>Mabyko Mono Narrow</h3>
+        <div class="sample narrow-plain">가나다라마바사아자차카타파하
+abcdefghijklmnopqrstuvwxyz
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+1234567890 !@#$%^&amp;* _=+~
+== ++ --     -&gt; &lt;= &gt;= || &amp;&amp;</div>
+        <p class="meta">500 / 1000, Nerd Font symbols 미포함, ligature ON</p>
+      </article>
+      <article class="card">
+        <h3>Mabyko Mono Narrow NL</h3>
+        <div class="sample narrow-nl">가나다라마바사아자차카타파하
+abcdefghijklmnopqrstuvwxyz
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+1234567890 !@#$%^&amp;* _=+~
+== ++ --     -&gt; &lt;= &gt;= || &amp;&amp;</div>
+        <p class="meta">500 / 1000, Nerd Font symbols 미포함, ligature OFF</p>
+      </article>
+      <article class="card">
+        <h3>500 / 1000 width</h3>
+        <div class="sample narrow">aaaaaaaaaaaaaaaaaaaa
+가가가가가가가가가가
+a가a가a가a가a가a가a
+ＡＢＣＤＥＦＧＨＩＪ
+１２３４５６７８９０</div>
+        <p class="meta">half-width 500, full-width 1000, 기본형과 동일한 높이</p>
       </article>
     </section>
 

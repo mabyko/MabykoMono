@@ -2,13 +2,22 @@
 
 ## Unreleased
 
+## 0.5.0
+
 ### Added
 
+- `Mabyko Mono Narrow`, `Mabyko Mono Narrow NL`, and `Mabyko Mono Narrow NF`, each with six weights
+- Narrow `500/1000` cells with the original Hangul outlines and unchanged glyph/line heights
+- Separate deterministic ZIPs and release-time Homebrew cask registration for all three Narrow families
+- Check configured widths, Narrow height preservation, and all 36 fonts / 6 packages
 - Homebrew tap `mabyko/tap` with casks for `Mabyko Mono NF`, `Mabyko Mono`, and `Mabyko Mono NL`
 - `bump-tap.yml` workflow that updates the tap casks when a release is published
 
 ### Changed
 
+- Update D2Coding 1.3.3 → 1.4.0, fontTools 4.64.0 → 4.66.1, and uv 0.12.10 → 0.12.23
+- Keep the default `600/1200` widths, JetBrains Mono 2.304, and Nerd Fonts 3.5.1
+- Pin the updated uv image by digest and use Docker build image `1.2.0`
 - Pin the release-drafter action to a commit SHA
 - Point D2Coding links to the renamed `naver/d2-coding-font` repository
 

@@ -56,6 +56,10 @@ def main() -> None:
         font = TTFont(font_file)
         half = advance(font, ord("0"))
         full = advance(font, ord("가"))
+        is_narrow = font_file.parent.name.startswith("narrow")
+        width_prefix = "narrow_" if is_narrow else ""
+        assert half == config["fonts"].getint(width_prefix + "half_width")
+        assert full == config["fonts"].getint(width_prefix + "full_width")
 
         assert half > 0
         assert full == half * 2
@@ -86,6 +90,9 @@ def main() -> None:
             font_file,
             family_names,
         )
+        assert all(("Narrow" in name) == is_narrow for name in family_names)
+        assert font["OS/2"].usWidthClass == (4 if is_narrow else 5)
+        assert font["name"].getDebugName(5) == f"Version {config['fonts']['version']}"
 
         assert font["post"].isFixedPitch == 1
         assert font["head"].created == font["head"].modified == timestamp
@@ -107,13 +114,33 @@ def main() -> None:
         else:
             assert ".liga" in shaped_equals, (font_file, shaped_equals)
 
+        if is_narrow:
+            standard_dir = font_file.parent.name.replace("narrow", "standard", 1)
+            standard_name = font_file.name.replace("Narrow", "", 1)
+            standard = TTFont(font_file.parent.parent / standard_dir / standard_name)
+            for table, fields in (("hhea", ("ascent", "descent", "lineGap")), ("OS/2", ("sTypoAscender", "sTypoDescender", "sTypoLineGap", "usWinAscent", "usWinDescent"))):
+                assert all(getattr(font[table], field) == getattr(standard[table], field) for field in fields)
+            cmap, standard_cmap = font.getBestCmap(), standard.getBestCmap()
+            shift = (advance(standard, ord("가")) - full) // 2
+            for codepoint in range(0xAC00, 0xD7A4):
+                glyph = font["glyf"][cmap[codepoint]]
+                original = standard["glyf"][standard_cmap[codepoint]]
+                assert (glyph.xMin, glyph.yMin, glyph.xMax, glyph.yMax) == (
+                    original.xMin - shift, original.yMin, original.xMax - shift, original.yMax
+                ), (font_file, codepoint, "Narrow must preserve Hangul size and height")
+            for codepoint in range(0x21, 0x7F):
+                glyph = font["glyf"][cmap[codepoint]]
+                original = standard["glyf"][standard_cmap[codepoint]]
+                assert (glyph.yMin, glyph.yMax) == (original.yMin, original.yMax), (font_file, codepoint)
+            standard.close()
+
         fc_scan = subprocess.check_output(
             ["fc-scan", "--format", "%{family}\\n%{style}\\n", str(font_file)],
             text=True,
         )
         assert "Mabyko Mono" in fc_scan
 
-    print(f"ok: {len(FONTS)} fonts coverage, metrics, HarfBuzz shaping, fontconfig")
+    print(f"ok: {len(FONTS)} fonts coverage, widths, Narrow height preservation, HarfBuzz shaping, fontconfig")
 
 
 if __name__ == "__main__":

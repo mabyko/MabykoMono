@@ -22,6 +22,7 @@ Mabyko Mono는 [JetBrains Mono](https://github.com/JetBrains/JetBrainsMono),
 - Nerd Font symbols 포함 variant 제공
 - 한글과 full-width glyph를 라틴 문자 2칸 폭으로 처리
 - 기본 폭: half-width `600`, full-width `1200`
+- Narrow 폭: half-width `500`, full-width `1000`, 기존 글자 높이와 줄 높이 유지
 
 ## 폰트 종류
 
@@ -30,9 +31,20 @@ Mabyko Mono는 [JetBrains Mono](https://github.com/JetBrains/JetBrainsMono),
 | Standard NF | `Mabyko Mono NF` | Nerd Font symbols 포함 |
 | Standard | `Mabyko Mono` | Nerd Font symbols 미포함 |
 | Standard NL | `Mabyko Mono NL` | Nerd Font symbols 미포함, ligature 제거 |
+| Narrow NF | `Mabyko Mono Narrow NF` | `500/1000`, Nerd Font symbols 포함 |
+| Narrow | `Mabyko Mono Narrow` | `500/1000`, Nerd Font symbols 미포함 |
+| Narrow NL | `Mabyko Mono Narrow NL` | `500/1000`, Nerd Font symbols 미포함, ligature 제거 |
 
 각 variant는 `Thin`, `Light`, `Regular`, `Medium`, `SemiBold`, `Bold`를 제공합니다.
 `NL`은 No Ligatures를 뜻합니다.
+
+기본형은 JetBrains Mono 영문과 D2Coding 한글의 기존 모양과 `600/1200` 폭을 유지합니다.
+Narrow는 영문 윤곽의 가로만 `5/6`로 줄이고, 한글은 원본 윤곽을 그대로 `1000` 폭에 배치합니다.
+두 계열 모두 한글은 영문 두 칸이며, 글자 높이와 줄 높이는 같습니다.
+가로 밀도가 높은 코드가 편하다면 Narrow를, 원래 영문 비율이 편하다면 기본형을 선택하세요.
+
+원본 버전: JetBrains Mono `2.304`, D2Coding `1.4.0`, Nerd Fonts `3.5.1`.
+[버전 확인과 설계 결정](docs/font-variants.md)을 참고하세요.
 
 ## 다운로드
 
@@ -54,6 +66,10 @@ brew install --cask mabyko/tap/font-mabyko-mono-nf   # Nerd Font symbols 포함
 brew install --cask mabyko/tap/font-mabyko-mono      # 일반
 brew install --cask mabyko/tap/font-mabyko-mono-nl   # ligature 제거
 ```
+
+Narrow 3종은 v0.5.0 릴리스 게시 시 tap에 등록됩니다. 이후 캐스크 이름은
+`font-mabyko-mono-narrow`, `font-mabyko-mono-narrow-nf`, `font-mabyko-mono-narrow-nl`입니다.
+릴리스 게시 전에는 로컬 빌드의 ZIP 또는 TTF로 설치할 수 있습니다.
 
 Homebrew 없이 설치할 때는 `.ttf` 파일을 더블클릭한 뒤 Font Book에서 설치합니다.
 
@@ -114,6 +130,9 @@ uv run --locked python scripts/test_outputs.py
 산출물은 `out/fonts/` 아래에 생성됩니다.
 Release zip 파일은 `out/release/` 아래에 생성됩니다.
 각 ZIP에는 폰트 6개와 `LICENSE`, 원본 저작권·라이선스 고지를 담은 `licenses/`가 포함됩니다.
+총 36개 TTF와 6개 ZIP을 생성합니다. Narrow ZIP은 `MabykoMono_Narrow_v*.zip`,
+`MabykoMono_Narrow_NF_v*.zip`, `MabykoMono_Narrow_NL_v*.zip`입니다.
+`testdata/preview.html`에서 기본형·Narrow·NL·NF와 두 칸 정렬을 확인할 수 있습니다.
 
 ### Docker 빌드
 
@@ -127,13 +146,13 @@ Docker는 현재 작업 폴더만 `/work`로 마운트합니다. Python 가상�
 Docker 전용 volume을 사용하므로 로컬 `.venv`는 사용하지 않습니다. Docker 환경을
 초기화하려면 `docker compose down -v`를 실행합니다.
 
-Docker 이미지는 `mabyko/mabyko-mono-build:1.1.0` 이름으로
+Docker 이미지는 `mabyko/mabyko-mono-build:1.2.0` 이름으로
 생성됩니다.
 이미지까지 지우려면 아래 명령을 실행합니다.
 
 ```sh
 docker compose down -v
-docker image rm mabyko/mabyko-mono-build:1.1.0
+docker image rm mabyko/mabyko-mono-build:1.2.0
 ```
 
 이미 생성된 산출물을 다시 검증할 때:
@@ -151,14 +170,14 @@ docker compose run --rm shell
 ### 재현성과 CI
 
 Docker 빌드는 Ubuntu 이미지 digest, APT 스냅샷(`20260905T000000Z`),
-uv `0.12.10`을 고정합니다. Python은 스냅샷의 시스템 Python을 사용하고,
+uv `0.12.23`을 고정합니다. Python은 스냅샷의 시스템 Python을 사용하고,
 fontTools는 `uv.lock`에 고정된 버전을 `--locked`로 설치합니다.
 로컬 빌드는 설치된 FontForge·HarfBuzz 버전에 따라 결과가 달라질 수 있습니다.
 
 `config.ini`의 `source_date_epoch`는 TTF와 ZIP의 고정 생성 시각(UTC Unix 초)입니다.
 폰트의 생성·수정 시각을 통일하고 FontForge의 `FFTM` 시각 테이블은 제거합니다.
 ZIP은 파일의 수정 시각이나 권한에 영향을 받지 않도록 패키징합니다.
-PR과 `main` push의 CI는 전체 빌드·검증 후 다시 빌드해 TTF 18개와 ZIP 3개의 SHA256을 비교합니다.
+PR과 `main` push의 CI는 전체 빌드·검증 후 다시 빌드해 TTF 36개와 ZIP 6개의 SHA256을 비교합니다.
 해시 일치는 같은 아키텍처와 고정된 빌드 환경을 기준으로 검증합니다.
 
 도구 버전을 갱신할 때는 Dockerfile의 이미지 digest와 APT 스냅샷을 갱신하고
@@ -174,6 +193,8 @@ uv run --locked python scripts/test_build.py
 
 ZIP·tar 압축 해제는 임시 폴더에서 완료된 뒤 원본 폴더로 이동합니다.
 실패하면 임시 파일을 정리하므로 재실행할 수 있습니다.
+Docker 빌드·검증은 `scripts/test_tap.py`로 릴리스 자동화의 캐스크 생성·URL·SHA256·재실행도 검사합니다.
+이 검사는 Linux의 `bash`·`sed`·`sha256sum`을 사용하며 네트워크나 실제 tap 쓰기 없이 실행합니다.
 
 ## Contributing
 
@@ -201,4 +222,4 @@ Mabyko Mono는 SIL Open Font License 1.1, 즉 OFL 1.1로 배포합니다.
 OFL 전문 및 Nerd Fonts 배포본의 MIT 라이선스를 릴리스 ZIP에도 동봉합니다.
 
 `JetBrains Mono`, `D2Coding`, `Nerd Fonts` 이름은 출처 표기를 위해서만 사용합니다.
-생성되는 폰트 family name은 `Mabyko Mono`, `Mabyko Mono NF`, `Mabyko Mono NL`입니다.
+생성되는 폰트 family name은 위의 폰트 종류 표에 있는 기본형·Narrow 6종입니다.
