@@ -64,17 +64,8 @@ Narrow는 영문 윤곽의 가로만 `5/6`로 줄이고, 한글은 원본 윤곽
 ## 다운로드
 
 최신 버전은 [Releases](https://github.com/mabyko/MabykoMono/releases/latest)에서
-받을 수 있습니다. [v0.5.0](https://github.com/mabyko/MabykoMono/releases/tag/v0.5.0)은 다음 6개 ZIP을 제공합니다.
-필요한 종류의 ZIP 하나를 고르면 됩니다.
-
-| 패밀리 | ZIP |
-| --- | --- |
-| Mabyko Mono | [MabykoMono-v0.5.0.zip](https://github.com/mabyko/MabykoMono/releases/download/v0.5.0/MabykoMono-v0.5.0.zip) |
-| Mabyko Mono NL | [MabykoMono_NL_v0.5.0.zip](https://github.com/mabyko/MabykoMono/releases/download/v0.5.0/MabykoMono_NL_v0.5.0.zip) |
-| Mabyko Mono NF | [MabykoMono_NF_v0.5.0.zip](https://github.com/mabyko/MabykoMono/releases/download/v0.5.0/MabykoMono_NF_v0.5.0.zip) |
-| Mabyko Mono Narrow | [MabykoMono_Narrow_v0.5.0.zip](https://github.com/mabyko/MabykoMono/releases/download/v0.5.0/MabykoMono_Narrow_v0.5.0.zip) |
-| Mabyko Mono Narrow NL | [MabykoMono_Narrow_NL_v0.5.0.zip](https://github.com/mabyko/MabykoMono/releases/download/v0.5.0/MabykoMono_Narrow_NL_v0.5.0.zip) |
-| Mabyko Mono Narrow NF | [MabykoMono_Narrow_NF_v0.5.0.zip](https://github.com/mabyko/MabykoMono/releases/download/v0.5.0/MabykoMono_Narrow_NF_v0.5.0.zip) |
+받을 수 있습니다. 릴리스 페이지의 Assets에서 위 폰트 종류 표를 참고해
+원하는 패밀리의 ZIP을 선택하세요.
 
 각 ZIP에는 6굵기의 TTF와 라이선스 고지가 들어 있습니다.
 기본형과 Narrow는 별도 패밀리여서 함께 설치할 수 있습니다.
