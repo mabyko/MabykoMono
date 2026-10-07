@@ -232,7 +232,7 @@ jobs:
 - [x] 3. 수동 설치 폰트 제거 → `brew install` 테스트 → `brew audit`/`brew style` 통과
 - [x] 4. README에 Homebrew 설치법 추가 (PR, docs 라벨)
 - [x] 5. PAT 발급·시크릿 등록 → `bump-tap.yml` 추가 (PR, build 라벨)
-- [ ] 6. (다음 릴리스 때) 자동 범프 동작 확인
+- [x] 6. v0.5.0 릴리스에서 자동 범프·Narrow 등록 동작 확인
 
 ## v0.5.0: Narrow 캐스크 자동 등록
 
@@ -247,4 +247,7 @@ jobs:
 
 릴리스 게시 후 ZIP을 내려받아 SHA256을 계산하고 기존/새 캐스크를 함께 커밋한다.
 기존 `MABYKO_TAP_GITHUB_TOKEN`을 사용하며, 새 캐스크 등록에도 별도 시크릿은 필요하지 않다.
-v0.5.0 게시 전에는 Narrow 캐스크를 설치할 수 없으므로 로컬 TTF/ZIP을 사용한다.
+v0.5.0 릴리스 게시와 자동 갱신이 완료되어 기본형·Narrow 6종 모두 tap에서 설치할 수 있다.
+실제 캐스크의 버전, ZIP URL·SHA256과 여섯 굵기의 `font` 항목을 확인했다.
+[자동화 실행 기록](https://github.com/mabyko/MabykoMono/actions/runs/37651444614)을 참고한다.
+사용자용 설치·업데이트·강제 재설치 절차는 [README](../README.md#설치)를 따른다.

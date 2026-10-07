@@ -11,9 +11,24 @@ Mabyko Mono는 [JetBrains Mono](https://github.com/JetBrains/JetBrainsMono),
 
 ## 미리보기
 
-| Mabyko Mono NF | Mabyko Mono | Mabyko Mono NL |
-| :---: | :---: | :---: |
-| ![Mabyko Mono NF](assets/preview-MabykoMonoNF.png) | ![Mabyko Mono](assets/preview-MabykoMono.png) | ![Mabyko Mono NL](assets/preview-MabykoMonoNL.png) |
+v0.5.0의 Regular를 모두 같은 글자 크기로 렌더한 샘플입니다.
+Narrow는 글자 높이를 유지하면서 영문 폭과 한글 사이 여백을 줄입니다.
+이미지를 누르면 원본 크기로 볼 수 있습니다.
+
+| 기본형 · 600 / 1200 | Narrow · 500 / 1000 |
+| :---: | :---: |
+| [<img src="assets/preview-MabykoMonoNF.png" width="320" alt="Mabyko Mono NF — 합자와 Nerd Font 기호 포함">](assets/preview-MabykoMonoNF.png) | [<img src="assets/preview-MabykoMonoNarrowNF.png" width="320" alt="Mabyko Mono Narrow NF — 합자와 Nerd Font 기호 포함">](assets/preview-MabykoMonoNarrowNF.png) |
+| [<img src="assets/preview-MabykoMono.png" width="320" alt="Mabyko Mono — 합자 포함, Nerd Font 기호 없음">](assets/preview-MabykoMono.png) | [<img src="assets/preview-MabykoMonoNarrow.png" width="320" alt="Mabyko Mono Narrow — 합자 포함, Nerd Font 기호 없음">](assets/preview-MabykoMonoNarrow.png) |
+| [<img src="assets/preview-MabykoMonoNL.png" width="320" alt="Mabyko Mono NL — 합자와 Nerd Font 기호 없음">](assets/preview-MabykoMonoNL.png) | [<img src="assets/preview-MabykoMonoNarrowNL.png" width="320" alt="Mabyko Mono Narrow NL — 합자와 Nerd Font 기호 없음">](assets/preview-MabykoMonoNarrowNL.png) |
+
+합자를 켜거나 끈 모습도 비교할 수 있습니다. 아래 두 샘플은 같은 NF 폰트를 사용합니다.
+NL 패밀리는 합자 자체를 포함하지 않습니다.
+
+| 합자 ON | 합자 OFF |
+| :---: | :---: |
+| [<img src="assets/ligature-on.png" width="320" alt="프로그래밍 합자 활성화">](assets/ligature-on.png) | [<img src="assets/ligature-off.png" width="320" alt="프로그래밍 합자 비활성화">](assets/ligature-off.png) |
+
+브라우저 렌더링 샘플이므로 실제 에디터의 작은 글자 힌팅과 줄바꿈·선택 동작은 별도로 확인하세요.
 
 ## 특징
 
@@ -49,7 +64,20 @@ Narrow는 영문 윤곽의 가로만 `5/6`로 줄이고, 한글은 원본 윤곽
 ## 다운로드
 
 최신 버전은 [Releases](https://github.com/mabyko/MabykoMono/releases/latest)에서
-받을 수 있습니다.
+받을 수 있습니다. [v0.5.0](https://github.com/mabyko/MabykoMono/releases/tag/v0.5.0)은 다음 6개 ZIP을 제공합니다.
+필요한 종류의 ZIP 하나를 고르면 됩니다.
+
+| 패밀리 | ZIP |
+| --- | --- |
+| Mabyko Mono | [MabykoMono-v0.5.0.zip](https://github.com/mabyko/MabykoMono/releases/download/v0.5.0/MabykoMono-v0.5.0.zip) |
+| Mabyko Mono NL | [MabykoMono_NL_v0.5.0.zip](https://github.com/mabyko/MabykoMono/releases/download/v0.5.0/MabykoMono_NL_v0.5.0.zip) |
+| Mabyko Mono NF | [MabykoMono_NF_v0.5.0.zip](https://github.com/mabyko/MabykoMono/releases/download/v0.5.0/MabykoMono_NF_v0.5.0.zip) |
+| Mabyko Mono Narrow | [MabykoMono_Narrow_v0.5.0.zip](https://github.com/mabyko/MabykoMono/releases/download/v0.5.0/MabykoMono_Narrow_v0.5.0.zip) |
+| Mabyko Mono Narrow NL | [MabykoMono_Narrow_NL_v0.5.0.zip](https://github.com/mabyko/MabykoMono/releases/download/v0.5.0/MabykoMono_Narrow_NL_v0.5.0.zip) |
+| Mabyko Mono Narrow NF | [MabykoMono_Narrow_NF_v0.5.0.zip](https://github.com/mabyko/MabykoMono/releases/download/v0.5.0/MabykoMono_Narrow_NF_v0.5.0.zip) |
+
+각 ZIP에는 6굵기의 TTF와 라이선스 고지가 들어 있습니다.
+기본형과 Narrow는 별도 패밀리여서 함께 설치할 수 있습니다.
 
 ## 설치
 
@@ -59,19 +87,28 @@ Narrow는 영문 윤곽의 가로만 `5/6`로 줄이고, 한글은 원본 윤곽
 
 ### macOS
 
-Homebrew로 설치합니다.
+Homebrew로 설치하면 이후 업데이트도 brew로 관리할 수 있습니다.
+먼저 캐스크 정보를 갱신한 뒤 필요한 설치 명령만 골라 실행하세요.
 
 ```sh
+brew update
+
+# 기본형
 brew install --cask mabyko/tap/font-mabyko-mono-nf   # Nerd Font symbols 포함
 brew install --cask mabyko/tap/font-mabyko-mono      # 일반
 brew install --cask mabyko/tap/font-mabyko-mono-nl   # ligature 제거
+
+# Narrow
+brew install --cask mabyko/tap/font-mabyko-mono-narrow-nf
+brew install --cask mabyko/tap/font-mabyko-mono-narrow
+brew install --cask mabyko/tap/font-mabyko-mono-narrow-nl
 ```
 
-Narrow 3종은 v0.5.0 릴리스 게시 시 tap에 등록됩니다. 이후 캐스크 이름은
-`font-mabyko-mono-narrow`, `font-mabyko-mono-narrow-nf`, `font-mabyko-mono-narrow-nl`입니다.
-릴리스 게시 전에는 로컬 빌드의 ZIP 또는 TTF로 설치할 수 있습니다.
+v0.5.0의 기본형·Narrow 6종 모두 tap에서 설치할 수 있습니다.
 
 Homebrew 없이 설치할 때는 `.ttf` 파일을 더블클릭한 뒤 Font Book에서 설치합니다.
+직접 설치한 같은 패밀리의 구버전은 교체하거나 제거한 뒤 설치하세요.
+brew로 이미 관리 중인 폰트는 서체관리자에서 지우지 않고 아래 업데이트 명령을 사용합니다.
 
 ### Windows
 
@@ -85,22 +122,76 @@ Homebrew 없이 설치할 때는 `.ttf` 파일을 더블클릭한 뒤 Font Book�
 fc-cache -f
 ```
 
-VS Code에서는 설치 후 아래처럼 설정합니다.
+### VS Code 설정
+
+설치 후 VS Code를 다시 실행하고 아래처럼 설정합니다.
 
 ```json
 {
-  "editor.fontFamily": "Mabyko Mono NF"
+  "editor.fontFamily": "'Mabyko Mono NF', monospace",
+  "editor.fontLigatures": true,
+  "terminal.integrated.fontFamily": "'Mabyko Mono NF'"
 }
 ```
 
+Narrow NF를 쓰려면 `editor.fontFamily`를 `"'Mabyko Mono Narrow NF', monospace"`로 바꿉니다.
+내장 터미널도 바꾸려면 `terminal.integrated.fontFamily`를 `"'Mabyko Mono Narrow NF'"`로 지정합니다.
+다른 종류도 위 표의 패밀리 이름을 그대로 사용합니다.
+합자를 끄려면 `editor.fontLigatures`를 `false`로 설정하거나 NL 패밀리를 선택하세요.
+[VS Code 폰트·터미널 설정](https://code.visualstudio.com/docs/terminal/appearance#_text-style)을 참고하세요.
+
 ### 업데이트
 
-폰트 파일에는 업그레이드 개념이 없어서, 같은 이름의 새 버전을 설치하면
-중복 설치로 처리됩니다. 이전 버전을 제거한 뒤 새 버전을 설치합니다.
+#### Homebrew로 설치한 경우
 
-- macOS: Homebrew로 설치했다면 `brew upgrade`로 처리됩니다. 직접 설치했다면 서체 관리자에서 `Mabyko Mono` 패밀리를 제거한 뒤 새로 설치합니다.
+`brew update`는 캐스크 정보를 갱신하고, `brew upgrade`는 설치된 폰트를 새 버전으로 교체합니다.
+기존 폰트를 직접 삭제할 필요는 없습니다. 아래는 NF 기본형을 업데이트하는 예입니다.
+
+```sh
+brew update
+brew upgrade --cask mabyko/tap/font-mabyko-mono-nf
+```
+
+Narrow NF는 명령의 캐스크 이름을 `mabyko/tap/font-mabyko-mono-narrow-nf`로 바꿉니다.
+다른 패밀리도 설치할 때 사용한 캐스크 이름을 지정하세요.
+
+brew의 설치 기록과 버전은 다음 명령으로 확인합니다.
+
+```sh
+brew list --cask --versions font-mabyko-mono-nf
+# 예: font-mabyko-mono-nf 0.5.0
+```
+
+이 기록은 파일 존재 여부를 검사하는 명령은 아닙니다.
+서체관리자에서 brew가 설치한 파일만 지우면 설치 기록이 남아 업그레이드가 실패할 수 있습니다.
+
+#### 파일을 지웠거나 설치가 깨진 경우
+
+`It seems the Font source '…/Library/Fonts/MabykoMonoNF-Bold.ttf' is not there`와 같은
+오류는 brew의 설치 기록과 실제 파일이 어긋났을 때 발생할 수 있습니다.
+해당 캐스크만 강제 재설치해서 설치 기록과 폰트 파일을 다시 맞춥니다.
+
+```sh
+brew update
+brew reinstall --cask --force mabyko/tap/font-mabyko-mono-nf
+```
+
+`--force`는 남아 있는 동일 경로의 파일을 덮어쓸 수도 있으므로,
+일반 업데이트에는 위의 `upgrade`를 사용하고 복구할 때만 사용하세요.
+재설치 후 `brew list --cask --versions`로 버전을 확인하고 에디터·터미널을 다시 실행합니다.
+
+#### 직접 설치한 경우
+
+- macOS: 직접 설치한 같은 패밀리의 구버전만 Font Book에서 교체하거나 제거합니다.
+  brew로 전환하려면 먼저 위 명령으로 brew 관리 여부를 확인하세요. 이미 관리 중이면 `upgrade`를 사용합니다.
 - Windows: 설정 → 개인 설정 → 글꼴에서 제거한 뒤 새로 설치합니다.
 - Linux: `~/.local/share/fonts`의 기존 파일을 덮어쓰고 `fc-cache -f`를 실행합니다.
+
+설치·업데이트 후에는 폰트를 쓰는 앱을 다시 실행하세요. macOS에서 같은 패밀리가 중복되면
+Font Book의 **파일 → 중복 해결**에서 복사본의 버전과 위치를 확인합니다.
+
+[Homebrew 명령 설명](https://docs.brew.sh/Manpage)과
+[Font Book 설치·중복 해결 안내](https://support.apple.com/guide/font-book/fntbk1000/mac)를 참고하세요.
 
 ## 빌드
 
