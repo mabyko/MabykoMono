@@ -12,6 +12,9 @@ PACKAGES = (
     ("standard", "MabykoMono-v{version}.zip"),
     ("standard-nl", "MabykoMono_NL_v{version}.zip"),
     ("standard-nf", "MabykoMono_NF_v{version}.zip"),
+    ("narrow", "MabykoMono_Narrow_v{version}.zip"),
+    ("narrow-nl", "MabykoMono_Narrow_NL_v{version}.zip"),
+    ("narrow-nf", "MabykoMono_Narrow_NF_v{version}.zip"),
 )
 
 

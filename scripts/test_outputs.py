@@ -20,12 +20,18 @@ VARIANTS = (
     ("standard-nf", "MabykoMonoNF"),
     ("standard", "MabykoMono"),
     ("standard-nl", "MabykoMonoNL"),
+    ("narrow-nf", "MabykoMonoNarrowNF"),
+    ("narrow", "MabykoMonoNarrow"),
+    ("narrow-nl", "MabykoMonoNarrowNL"),
 )
 
 PACKAGES = (
     ("standard", "MabykoMono", "MabykoMono-v{version}.zip"),
     ("standard-nl", "MabykoMonoNL", "MabykoMono_NL_v{version}.zip"),
     ("standard-nf", "MabykoMonoNF", "MabykoMono_NF_v{version}.zip"),
+    ("narrow", "MabykoMonoNarrow", "MabykoMono_Narrow_v{version}.zip"),
+    ("narrow-nl", "MabykoMonoNarrowNL", "MabykoMono_Narrow_NL_v{version}.zip"),
+    ("narrow-nf", "MabykoMonoNarrowNF", "MabykoMono_Narrow_NF_v{version}.zip"),
 )
 
 

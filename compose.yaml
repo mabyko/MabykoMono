@@ -2,7 +2,7 @@ name: mabyko-mono
 
 services:
   shell:
-    image: mabyko/mabyko-mono-build:1.1.0
+    image: mabyko/mabyko-mono-build:1.2.0
     pull_policy: build
     build: .
     working_dir: /work
@@ -15,7 +15,7 @@ services:
     command: bash
 
   build:
-    image: mabyko/mabyko-mono-build:1.1.0
+    image: mabyko/mabyko-mono-build:1.2.0
     pull_policy: build
     build: .
     working_dir: /work
@@ -28,6 +28,7 @@ services:
     command: >
       bash -lc "uv sync --locked &&
       uv run --locked python scripts/test_build.py &&
+      uv run --locked python scripts/test_tap.py &&
       uv run --locked python scripts/fetch.py &&
       rm -rf build out/fonts &&
       fontforge -script scripts/build_regular.py &&
@@ -37,7 +38,7 @@ services:
       uv run --locked python scripts/test_outputs.py"
 
   test:
-    image: mabyko/mabyko-mono-build:1.1.0
+    image: mabyko/mabyko-mono-build:1.2.0
     pull_policy: build
     build: .
     working_dir: /work
@@ -48,7 +49,8 @@ services:
       - docker-venv:/venv
       - uv-cache:/root/.cache/uv
     command: >
-      bash -lc "uv run --locked python scripts/test_font.py &&
+      bash -lc "uv run --locked python scripts/test_tap.py &&
+      uv run --locked python scripts/test_font.py &&
       uv run --locked python scripts/package_release.py &&
       uv run --locked python scripts/test_outputs.py"
 

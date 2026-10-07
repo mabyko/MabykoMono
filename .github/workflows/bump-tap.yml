@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: "Release tag (e.g. v0.4.0)"
+        description: "Release tag (e.g. v0.5.0)"
         required: true
 
 permissions:
@@ -31,7 +31,7 @@ jobs:
           VERSION="${TAG#v}"
           BASE="https://github.com/mabyko/MabykoMono/releases/download/${TAG}"
           bump() {  # bump <cask-file> <zip-name>
-            sha=$(curl -sfL "${BASE}/$2" | shasum -a 256 | cut -d' ' -f1)
+            sha=$(curl -sfL "${BASE}/$2" | sha256sum | cut -d' ' -f1)
             sed -i -E \
               -e "s/version \"[^\"]+\"/version \"${VERSION}\"/" \
               -e "s/sha256 \"[^\"]+\"/sha256 \"${sha}\"/" \
@@ -40,6 +40,27 @@ jobs:
           bump font-mabyko-mono.rb    "MabykoMono-${TAG}.zip"
           bump font-mabyko-mono-nf.rb "MabykoMono_NF_${TAG}.zip"
           bump font-mabyko-mono-nl.rb "MabykoMono_NL_${TAG}.zip"
+          narrow_cask() {  # narrow_cask <token> <font-prefix> <family> <zip-name>
+            if [ ! -f "Casks/$1.rb" ]; then
+              {
+                printf 'cask "%s" do\n' "$1"
+                printf '  version "0"\n  sha256 "0"\n\n'
+                printf '  url "https://github.com/mabyko/MabykoMono/releases/download/v#{version}/%s_v#{version}.zip"\n' "${4%_${TAG}.zip}"
+                printf '  name "%s"\n' "$3"
+                printf '  desc "Korean-friendly narrow programming font"\n'
+                printf '  homepage "https://github.com/mabyko/MabykoMono"\n\n'
+                printf '  livecheck do\n    url :url\n    strategy :github_latest\n  end\n\n'
+                for style in Thin Light Regular Medium SemiBold Bold; do
+                  printf '  font "%s-%s.ttf"\n' "$2" "$style"
+                done
+                printf 'end\n'
+              } > "Casks/$1.rb"
+            fi
+            bump "$1.rb" "$4"
+          }
+          narrow_cask font-mabyko-mono-narrow MabykoMonoNarrow "Mabyko Mono Narrow" "MabykoMono_Narrow_${TAG}.zip"
+          narrow_cask font-mabyko-mono-narrow-nf MabykoMonoNarrowNF "Mabyko Mono Narrow NF" "MabykoMono_Narrow_NF_${TAG}.zip"
+          narrow_cask font-mabyko-mono-narrow-nl MabykoMonoNarrowNL "Mabyko Mono Narrow NL" "MabykoMono_Narrow_NL_${TAG}.zip"
           git --no-pager diff
 
       - name: Commit and push
@@ -47,11 +68,12 @@ jobs:
           TAG: ${{ inputs.tag || github.event.release.tag_name }}
         run: |
           set -euo pipefail
-          if git diff --quiet; then
+          git add Casks
+          if git diff --cached --quiet; then
             echo "casks already at ${TAG}"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git commit -am "bump Mabyko Mono casks to ${TAG}"
+          git commit -m "bump Mabyko Mono casks to ${TAG}"
           git push

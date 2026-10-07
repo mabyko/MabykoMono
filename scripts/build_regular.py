@@ -53,6 +53,30 @@ VARIANTS = (
         "pattern_key": "jetbrains_mono_nl_pattern",
         "nerd": False,
     },
+    {
+        "dirname": "narrow-nf",
+        "family": "Mabyko Mono Narrow NF",
+        "prefix": "MabykoMonoNarrowNF",
+        "pattern_key": "jetbrains_mono_pattern",
+        "nerd": True,
+        "narrow": True,
+    },
+    {
+        "dirname": "narrow",
+        "family": "Mabyko Mono Narrow",
+        "prefix": "MabykoMonoNarrow",
+        "pattern_key": "jetbrains_mono_pattern",
+        "nerd": False,
+        "narrow": True,
+    },
+    {
+        "dirname": "narrow-nl",
+        "family": "Mabyko Mono Narrow NL",
+        "prefix": "MabykoMonoNarrowNL",
+        "pattern_key": "jetbrains_mono_nl_pattern",
+        "nerd": False,
+        "narrow": True,
+    },
 )
 
 
@@ -220,6 +244,8 @@ def build_style(fonts, variant, style, weight, half_width, full_width, output_di
 
     d2.close()
     set_names(jb, variant["family"], style, weight, fonts["version"], half_width, full_width)
+    if variant.get("narrow"):
+        jb.os2_width = 4  # Semi-condensed, with the original vertical metrics.
     jb.generate(str(output_dir / f"{variant['prefix']}-{style}.ttf"))
     jb.close()
 
@@ -240,12 +266,17 @@ def main():
     half_width = int(fonts.get("half_width", full_width // 2))
     if full_width != half_width * 2:
         raise ValueError("full_width must be exactly twice half_width")
+    narrow_half = fonts.getint("narrow_half_width", 500)
+    narrow_full = fonts.getint("narrow_full_width", narrow_half * 2)
+    if narrow_half <= 0 or narrow_full != narrow_half * 2:
+        raise ValueError("narrow_full_width must be exactly twice positive narrow_half_width")
 
     for variant in VARIANTS:
+        variant_half, variant_full = (narrow_half, narrow_full) if variant.get("narrow") else (half_width, full_width)
         output_dir = output_root / variant["dirname"]
         output_dir.mkdir(parents=True, exist_ok=True)
         for style, weight in STYLES:
-            build_style(fonts, variant, style, weight, half_width, full_width, output_dir)
+            build_style(fonts, variant, style, weight, variant_half, variant_full, output_dir)
 
 
 if __name__ == "__main__":

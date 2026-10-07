@@ -2,6 +2,8 @@
 
 Mabyko Mono를 `brew install`로 설치할 수 있게 하는 작업 순서.
 2026-08-03 기준(v0.2.0)으로 작성했고, sha256 값은 실제 릴리스 자산에서 계산·검증한 값이다.
+아래 초기 캐스크 예시의 버전과 해시는 과거 릴리스 기준이다. 현재 버전은 `config.ini`와
+README를 따르며, v0.5.0의 Narrow 자동 등록은 마지막 절을 참고한다.
 
 ## 전체 구조
 
@@ -231,3 +233,18 @@ jobs:
 - [x] 4. README에 Homebrew 설치법 추가 (PR, docs 라벨)
 - [x] 5. PAT 발급·시크릿 등록 → `bump-tap.yml` 추가 (PR, build 라벨)
 - [ ] 6. (다음 릴리스 때) 자동 범프 동작 확인
+
+## v0.5.0: Narrow 캐스크 자동 등록
+
+현재 `.github/workflows/bump-tap.yml`은 기존 캐스크 3개를 갱신하고, 다음 캐스크가
+없으면 여섯 굵기의 `font` 항목을 가진 새 레시피를 만든다. 이미 있으면 버전과 해시만 갱신한다.
+
+| 캐스크 | 패밀리 | 릴리스 ZIP |
+| --- | --- | --- |
+| `font-mabyko-mono-narrow` | `Mabyko Mono Narrow` | `MabykoMono_Narrow_v*.zip` |
+| `font-mabyko-mono-narrow-nf` | `Mabyko Mono Narrow NF` | `MabykoMono_Narrow_NF_v*.zip` |
+| `font-mabyko-mono-narrow-nl` | `Mabyko Mono Narrow NL` | `MabykoMono_Narrow_NL_v*.zip` |
+
+릴리스 게시 후 ZIP을 내려받아 SHA256을 계산하고 기존/새 캐스크를 함께 커밋한다.
+기존 `MABYKO_TAP_GITHUB_TOKEN`을 사용하며, 새 캐스크 등록에도 별도 시크릿은 필요하지 않다.
+v0.5.0 게시 전에는 Narrow 캐스크를 설치할 수 없으므로 로컬 TTF/ZIP을 사용한다.
